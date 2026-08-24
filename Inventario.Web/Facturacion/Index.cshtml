@@ -1,0 +1,110 @@
+@page
+@model Inventario.Web.Pages.Facturacion.IndexModel
+@{
+    ViewData["Title"] = "Facturación / Ventas";
+}
+
+<div class="row g-4">
+    <div class="col-md-7">
+        <div class="card shadow-sm border-0 p-3 mb-3">
+            <h5 class="fw-bold mb-3"><i class="bi bi-cart-plus me-2"></i>Agregar Productos a la Factura</h5>
+            <div class="row g-2">
+                <div class="col-md-6">
+                    <label class="form-label small fw-bold">Producto</label>
+                    <select id="selectProducto" class="form-select">
+                        <option value="">-- Seleccionar --</option>
+                        @foreach (var prod in Model.ProductosDisponibles)
+                        {
+                            <option value="@prod.ProductoID" data-precio="@prod.PrecioVenta">@prod.Nombre ($@prod.PrecioVenta.ToString("N2"))</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label small fw-bold">Cantidad</label>
+                    <input type="number" id="cantProducto" class="form-control" value="1" min="1" />
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="button" onclick="agregarAFactura()" class="btn btn-primary w-100">
+                        <i class="bi bi-plus-lg"></i> Agregar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-0 p-3">
+            <h6 class="fw-bold mb-3">Detalle de la Venta</h6>
+            <table class="table align-middle" id="tablaFactura">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cant.</th>
+                        <th>Precio U.</th>
+                        <th>Subtotal</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-5">
+        <div class="card shadow-sm border-0 p-4 bg-light">
+            <h4 class="fw-bold text-dark mb-3">Resumen de Pago</h4>
+            <hr />
+            <div class="d-flex justify-content-between fs-5 mb-2">
+                <span>Subtotal:</span>
+                <span id="txtSubtotal">$0.00</span>
+            </div>
+            <div class="d-flex justify-content-between fs-4 fw-bold text-primary mb-4">
+                <span>Total a Cobrar:</span>
+                <span id="txtTotal">$0.00</span>
+            </div>
+            <button class="btn btn-success btn-lg w-100 fw-bold py-3 shadow-sm rounded-3">
+                <i class="bi bi-printer me-2"></i> Procesar e Imprimir Factura
+            </button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    let items = [];
+
+    function agregarAFactura() {
+        const select = document.getElementById('selectProducto');
+        const prodId = select.value;
+        if (!prodId) return;
+
+        const prodNombre = select.options[select.selectedIndex].text.split(' ($')[0];
+        const precio = parseFloat(select.options[select.selectedIndex].dataset.precio || 0);
+        const cantidad = parseInt(document.getElementById('cantProducto').value);
+
+        if (cantidad <= 0) return;
+
+        items.push({ prodId, prodNombre, cantidad, precio, subtotal: cantidad * precio });
+        renderTabla();
+    }
+
+    function renderTabla() {
+        const tbody = document.querySelector('#tablaFactura tbody');
+        tbody.innerHTML = '';
+        let total = 0;
+
+        items.forEach((item, index) => {
+            total += item.subtotal;
+            tbody.innerHTML += `
+                <tr>
+                    <td>${item.prodNombre}</td>
+                    <td>${item.cantidad}</td>
+                    <td>$${item.precio.toFixed(2)}</td>
+                    <td>$${item.subtotal.toFixed(2)}</td>
+                    <td><button onclick="items.splice(${index},1);renderTabla()" class="btn btn-sm btn-link text-danger"><i class="bi bi-trash"></i></button></td>
+                </tr>`;
+        });
+
+        document.getElementById('txtSubtotal').innerText = `$${total.toFixed(2)}`;
+        document.getElementById('txtTotal').innerText = `$${total.toFixed(2)}`;
+    }
+</script>
+}

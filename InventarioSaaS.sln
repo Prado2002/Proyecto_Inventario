@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventario.Domain", "Inventario.Domain\Inventario.Domain.csproj", "{2E4F4AA6-8E16-4E9F-8CDC-F7F717E5A6A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventario.Application", "Inventario.Application\Inventario.Application.csproj", "{DD7D02C2-9ABB-4DD3-90FC-26361D7649F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventario.Infrastructure", "Inventario.Infrastructure\Inventario.Infrastructure.csproj", "{32F2BF83-1FA7-4B29-B7FC-269EDF32D68C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventario.Web", "Inventario.Web\Inventario.Web.csproj", "{EBFBA9F6-B71B-4533-A088-3469B0AE676E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E4F4AA6-8E16-4E9F-8CDC-F7F717E5A6A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E4F4AA6-8E16-4E9F-8CDC-F7F717E5A6A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E4F4AA6-8E16-4E9F-8CDC-F7F717E5A6A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E4F4AA6-8E16-4E9F-8CDC-F7F717E5A6A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD7D02C2-9ABB-4DD3-90FC-26361D7649F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD7D02C2-9ABB-4DD3-90FC-26361D7649F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD7D02C2-9ABB-4DD3-90FC-26361D7649F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD7D02C2-9ABB-4DD3-90FC-26361D7649F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32F2BF83-1FA7-4B29-B7FC-269EDF32D68C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32F2BF83-1FA7-4B29-B7FC-269EDF32D68C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32F2BF83-1FA7-4B29-B7FC-269EDF32D68C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32F2BF83-1FA7-4B29-B7FC-269EDF32D68C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBFBA9F6-B71B-4533-A088-3469B0AE676E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBFBA9F6-B71B-4533-A088-3469B0AE676E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBFBA9F6-B71B-4533-A088-3469B0AE676E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBFBA9F6-B71B-4533-A088-3469B0AE676E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

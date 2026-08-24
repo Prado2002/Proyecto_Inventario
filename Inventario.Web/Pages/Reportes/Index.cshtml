@@ -1,0 +1,109 @@
+@page
+@model Inventario.Web.Pages.Reportes.IndexModel
+@{
+    ViewData["Title"] = "Reportes e Indicadores";
+}
+
+<div class="mb-4">
+    <h3 class="fw-bold mb-0">Resumen y Reportes del Inventario</h3>
+    <p class="text-muted small mb-0">Indicadores clave de stock, valoración y caducidad</p>
+</div>
+
+<!-- Tarjetas KPIs -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm p-3 border-start border-4 border-primary">
+            <span class="text-muted small fw-bold">TOTAL PRODUCTOS</span>
+            <h2 class="fw-bold my-1">@Model.TotalProductos</h2>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm p-3 border-start border-4 border-success">
+            <span class="text-muted small fw-bold">UNIDADES EN STOCK</span>
+            <h2 class="fw-bold my-1">@Model.TotalStock</h2>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm p-3 border-start border-4 border-info">
+            <span class="text-muted small fw-bold">VALORIZACIÓN TOTAL</span>
+            <h2 class="fw-bold my-1">$@Model.ValorTotalInventario.ToString("N2")</h2>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm p-3 border-start border-4 border-warning">
+            <span class="text-muted small fw-bold">LOTES POR VENCER (30d)</span>
+            <h2 class="fw-bold my-1">@Model.ProductosPorVencer</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <!-- Tabla Stock por Bodega -->
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white py-3 border-0">
+                <h6 class="fw-bold mb-0">Distribución por Bodega</h6>
+            </div>
+            <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Bodega</th>
+                            <th class="text-end">Unidades Almacenadas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var b in Model.StockPorBodega)
+                        {
+                            <tr>
+                                <td>@b.Bodega</td>
+                                <td class="text-end fw-bold">@b.CantidadTotal</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla Alertas de Vencimiento -->
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white py-3 border-0">
+                <h6 class="fw-bold mb-0 text-warning">Próximos Vencimientos</h6>
+            </div>
+            <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Producto</th>
+                            <th>Lote</th>
+                            <th>Vencimiento</th>
+                            <th class="text-end">Cant.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (!Model.ProximosVencimientos.Any())
+                        {
+                            <tr>
+                                <td colspan="4" class="text-center text-muted py-3">No hay productos próximos a vencer.</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            @foreach (var v in Model.ProximosVencimientos)
+                            {
+                                <tr>
+                                    <td>@v.Producto</td>
+                                    <td><code>@v.Lote</code></td>
+                                    <td class="text-danger fw-semibold">@v.FechaVencimiento.ToString("dd/MM/yyyy")</td>
+                                    <td class="text-end fw-bold">@v.Cantidad</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

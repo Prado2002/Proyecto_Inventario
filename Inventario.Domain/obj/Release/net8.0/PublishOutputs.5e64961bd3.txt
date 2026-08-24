@@ -1,0 +1,3 @@
+C:\Users\Personal\Desktop\Proyecto_inventario\Inventario.Domain\bin\Release\net8.0\publish\Inventario.Domain.dll
+C:\Users\Personal\Desktop\Proyecto_inventario\Inventario.Domain\bin\Release\net8.0\publish\Inventario.Domain.deps.json
+C:\Users\Personal\Desktop\Proyecto_inventario\Inventario.Domain\bin\Release\net8.0\publish\Inventario.Domain.pdb
