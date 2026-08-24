@@ -12,4 +12,7 @@ public class Producto
 
     public Categoria? Categoria { get; set; }
     public ICollection<Lote> Lotes { get; set; } = new List<Lote>();
+
+    // Propiedad calculada: suma el stock de todos sus lotes asociados
+    public int StockTotal => Lotes?.Sum(l => l.CantidadDisponible) ?? 0;
 }
